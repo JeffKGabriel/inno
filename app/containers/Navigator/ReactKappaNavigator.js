@@ -1,12 +1,15 @@
 import React, {PropTypes, Component} from 'react'
 import { Navigator } from 'react-native'
-import { SplashContainer } from '../../containers'
+import { SplashContainer, FooterTabContainer } from '../../containers'
 
 export default class ReactKappaNavigator extends Component{
 
   renderScene= (route, navigator) => {
     //pop() push()
-    return <SplashContainer navigator={navigator} />
+
+    return <FooterTabContainer navigator={navigator} />
+
+    //return <SplashContainer navigator={navigator} />
   }
   configureScene = (route) =>{
 
