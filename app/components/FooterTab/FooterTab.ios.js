@@ -16,13 +16,14 @@ export default function FooterTab (props){
 
   return(
     <TabBarIOS>
+
       <Icon.TabBarItem
         iconSize={35}
         iconName='ios-home-outline'
         title='Home'
         selected={props.activeFooterTab === 'home'}
         onPress={ ()=> props.onTabSelect('home') }>
-          <HomeContainer navigator={navigator}/>
+          <HomeContainer navigator={props.navigator}/>
       </Icon.TabBarItem>
 
       <Icon.TabBarItem
@@ -31,7 +32,7 @@ export default function FooterTab (props){
         title='Leaderboard'
         selected={props.activeFooterTab === 'leaderboard'}
         onPress={ ()=> props.onTabSelect('leaderboard') }>
-          <LeaderboardContainer navigator={navigator}/>
+          <LeaderboardContainer navigator={props.navigator}/>
       </Icon.TabBarItem>
 
     </TabBarIOS>

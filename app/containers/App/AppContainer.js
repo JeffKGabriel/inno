@@ -3,7 +3,7 @@ import { View, Text } from 'react-native'
 import {connect} from 'react-redux'
 import { ReactKappaNavigator } from '../../containers'
 import {PreSplash} from '../../components'
-import { firebaseAuth } from '../../config/constants'
+import {firebaseAuth } from '../../config/constants'
 import {onAuthChange} from '../../redux/modules/authentication'
 
 class AppContainer extends Component{
