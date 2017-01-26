@@ -1,9 +1,13 @@
 import React, {PropTypes, Component} from 'react'
 import { Navigator } from 'react-native'
 import {Settings} from '../../components'
+import {connect} from 'react-redux'
+import {handleUnauth} from '../../redux/modules/authentication'
+import {showFlashNotification} from '../../redux/modules/flashNotification'
 
 
-export default class SettingsContainer extends Component{
+
+class SettingsContainer extends Component{
 
   static propTypes={
     navigator :  PropTypes.object.isRequired,
@@ -21,13 +25,16 @@ export default class SettingsContainer extends Component{
     this.setState({restDuration})
   }
   handleTimerComplete = () =>{
-    console.log("finised sliding timer");
+    this.props.dispatch(showFlashNotification({
+      text: "Timer Updated"
+    }))
   }
   handleRestComplete = () =>{
     console.log("finised sliding rest");
   }
   handleLogout= () =>{
-    console.log("Logging out");
+    this.props.dispatch( handleUnauth() )
+
   }
 
   render(){
@@ -46,3 +53,8 @@ export default class SettingsContainer extends Component{
     )
   }
 }
+
+
+export default connect(
+
+)(SettingsContainer)
