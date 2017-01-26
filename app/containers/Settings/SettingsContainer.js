@@ -4,18 +4,23 @@ import {Settings} from '../../components'
 import {connect} from 'react-redux'
 import {handleUnauth} from '../../redux/modules/authentication'
 import {showFlashNotification} from '../../redux/modules/flashNotification'
+import {handleAndUpdateTimer, handleAndUpdateRest} from '../../redux/modules/settings'
+
 
 
 
 class SettingsContainer extends Component{
 
   static propTypes={
+
+    timerDuration: PropTypes.number.isRequired,
+    restDuration: PropTypes.number.isRequired,
     navigator :  PropTypes.object.isRequired,
   }
 
   state={
-    timerDuration: 20,
-    restDuration: 5,
+    timerDuration: this.props.timerDuration,
+    restDuration: this.props.restDuration,
   }
 
   handleTimerChange = (timerDuration) =>{
@@ -28,9 +33,11 @@ class SettingsContainer extends Component{
     this.props.dispatch(showFlashNotification({
       text: "Timer Updated"
     }))
+
+    this.props.dispatch(handleAndUpdateTimer(this.state.timerDuration) )
   }
   handleRestComplete = () =>{
-    console.log("finised sliding rest");
+    this.props.dispatch(handleAndUpdateRest(this.state.restDuration) )
   }
   handleLogout= () =>{
     this.props.dispatch( handleUnauth() )
@@ -55,6 +62,14 @@ class SettingsContainer extends Component{
 }
 
 
-export default connect(
 
+function mapStateToProps({settings}){
+  return{
+    timerDuration: settings.timerDuration,
+    restDuration: settings.restDuration,
+  }
+}
+
+export default connect(
+  mapStateToProps
 )(SettingsContainer)

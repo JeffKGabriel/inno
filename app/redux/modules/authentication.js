@@ -1,4 +1,6 @@
 import {getAccessToken, authWithToken, updateUser, logout} from '../../api/auth'
+import {fetchSettings} from '../../api/settings'
+import {addSettingsTimerDuration, addSettingsRestDuration} from '../../redux/modules/settings'
 
 const AUTHENTICATING = 'AUTHENTICATING'
 const NOT_AUTHED = 'NOT_AUTHED'
@@ -52,6 +54,11 @@ export function onAuthChange(user){
         displayName,
         photoURL,
       })
+        .then( () => fetchSettings(uid) )
+        .then( (settings) => Promise.all([
+          dispatch( addSettingsTimerDuration(settings.timerDuration) ),
+          dispatch( addSettingsRestDuration(settings.restDuration) )
+        ]))
         .then( () => dispatch(isAuthed(uid)) )
     }
   }
