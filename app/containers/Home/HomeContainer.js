@@ -1,6 +1,7 @@
 import React, {PropTypes, Component} from 'react'
 import {connect} from 'react-redux'
 import {Home} from '../../components'
+import {incrementAndHandleScore, decrementAndHandleScore} from '../../redux/modules/scores'
 
 function secondsToHMS (secs) {
   const hours = Math.floor(secs / 3600)
@@ -15,6 +16,7 @@ class HomeContainer extends Component{
     navigator: PropTypes.object.isRequired,
     timerDuration: PropTypes.number.isRequired,
     restDuration: PropTypes.number.isRequired,
+    score: PropTypes.number.isRequired,
   }
 
   state={
@@ -40,6 +42,9 @@ class HomeContainer extends Component{
   handleToggleCountdown =() =>{
     if(this.state.countdownRunning){
       this.setState({countdownRunning:false})
+
+      this.props.dispatch(decrementAndHandleScore(5))
+
       return window.clearInterval(this.interval)
     }
 
@@ -58,12 +63,21 @@ class HomeContainer extends Component{
             : this.props.restDuration,
           activeCountdown : this.state.activeCountdown === 'timer' ? 'rest' : 'timer'
         })
+
+        this.props.dispatch(incrementAndHandleScore(5))
+
       } else{
         this.setState({
           [activeCountdown] : nextSecond,
           countdownRunning : true
         })
       }
+
+      if(nextSecond % 60 === 0){
+        this.props.dispatch(incrementAndHandleScore(1))
+
+      }
+
     },1000)
 
   }
@@ -76,6 +90,8 @@ class HomeContainer extends Component{
       activeCountdown: 'timer',
       countdownRunning: false,
     })
+
+    this.props.dispatch(decrementAndHandleScore(5))
   }
 
   handleSkipRest=()=>{
@@ -101,6 +117,7 @@ class HomeContainer extends Component{
   render(){
     return(
       <Home
+         score={this.props.score}
          countdownRunning={this.state.countdownRunning}
          timer ={ secondsToHMS(this.state.timer) }
          rest = { secondsToHMS(this.state.rest) }
@@ -114,10 +131,11 @@ class HomeContainer extends Component{
   }
 }
 
-mapStateToProps = ({settings}) =>{
+mapStateToProps = ({settings, scores, authentication}) =>{
   return{
     timerDuration: settings.timerDuration * 60,
     restDuration: settings.restDuration * 60,
+    score: scores.usersScores[authentication.authedId],
   }
 }
 

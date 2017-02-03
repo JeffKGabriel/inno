@@ -16,6 +16,7 @@ Home.propTypes = {
   activeCountdown : PropTypes.string.isRequired,
   countdownRunning : PropTypes.bool.isRequired,
   progress:  PropTypes.number.isRequired,
+  score: PropTypes.number.isRequired,
   onReset : PropTypes.func.isRequired,
   onSkipRest : PropTypes.func.isRequired,
   onToggleCountdown : PropTypes.func.isRequired,
@@ -23,14 +24,12 @@ Home.propTypes = {
 
 export default function Home (props){
 
-  console.log('Home', props)
-
   return(
     <View style={ [styles.container , {backgroundColor: props.activeCountdown === 'timer' ? '#00F': '#F00'} ]}>
       <ReactKappaNavBar
         title='Home'
         rightButton={<Gear onPress={ props.handleToSettings} />}/>
-      <Score count={59} />
+      <Score count={props.score} />
       <Countdown formattedTime={props[props.activeCountdown]} />
       <ProgressBar progress={props.progress} />
       <View style={styles.footer}>

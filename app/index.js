@@ -4,7 +4,7 @@ import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import * as reducers from './redux'
-import devTools from 'remote-redux-devtools'
+import devToolsExtension from 'remote-redux-devtools'
 import { LOGGING_OUT } from './redux/modules/authentication'
 
 const appReducer = combineReducers(reducers)
@@ -18,14 +18,12 @@ function rootReducer (state, action){
 }
 
 const store = createStore(
-
   rootReducer,
-
   compose(
     applyMiddleware(thunk),
-    devTools()
+    devToolsExtension()
+    //window.devToolsExtension ? window.devToolsExtension() : f => f
   )
-
 )
 
 
