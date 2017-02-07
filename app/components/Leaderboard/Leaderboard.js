@@ -20,7 +20,7 @@ export default function Leaderboard (props){
 
         { props.listenerSet === false
           ? <ActivityIndicator size='small' style={styles.activityIndicator} color="#F00" />
-        : <ListView renderRow={props.renderRow} dataSource={props.dataSource} />
+          : <ListView renderRow={props.renderRow} dataSource={props.dataSource} />
         }
 
     </View>

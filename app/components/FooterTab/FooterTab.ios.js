@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
-import { View, StyleSheet, Text, TabBarIOS } from 'react-native'
+import { View, StyleSheet, Text, TabBarIOS, StatusBar } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
-import {HomeContainer, LeaderboardContainer} from '../../containers'
+import {HomeContainer, LeaderboardContainer, ProfileContainer} from '../../containers'
 
 FooterTab.propTypes = {
   activeFooterTab: PropTypes.string.isRequired,
@@ -16,7 +16,6 @@ export default function FooterTab (props){
 
   return(
     <TabBarIOS>
-
       <Icon.TabBarItem
         iconSize={35}
         iconName='ios-home-outline'
@@ -35,7 +34,15 @@ export default function FooterTab (props){
           <LeaderboardContainer navigator={props.navigator}/>
       </Icon.TabBarItem>
 
-    </TabBarIOS>
+      <Icon.TabBarItem
+        iconSize={35}
+        iconName='ios-warning-outline'
+        title='Profile'
+        selected={props.activeFooterTab === 'profile'}
+        onPress={ ()=> props.onTabSelect('profile') }>
+          <ProfileContainer navigator={props.navigator}/>
+      </Icon.TabBarItem>
 
+    </TabBarIOS>
   )
 }

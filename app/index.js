@@ -1,7 +1,7 @@
 import React from 'react'
 import { AppContainer } from './containers'
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
-import { Provider } from 'react-redux'
+import { Provider,StatusBar } from 'react-redux'
 import thunk from 'redux-thunk'
 import * as reducers from './redux'
 import devToolsExtension from 'remote-redux-devtools'

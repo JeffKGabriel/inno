@@ -10,3 +10,10 @@ export Settings from './Settings/Settings'
 export FlashNotification from './FlashNotification/FlashNotification'
 export PressableIcon from './Icons/PressableIcon'
 export Leader from './Leaderboard/Leader'
+
+
+//inno
+export Profile from './Profile/Profile'
+export Message from './Message/Message'
+export MessageList from './Message/MessageList'
+export Game from './Game/Game'

@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react'
-import { View, Text } from 'react-native'
+import { View, Text,StatusBar } from 'react-native'
 import {connect} from 'react-redux'
 import { ReactKappaNavigator } from '../../containers'
 import {PreSplash, FlashNotification } from '../../components'
@@ -29,6 +29,8 @@ class AppContainer extends Component{
   render(){
     return(
       <View style={{flex:1}}>
+      <StatusBar hidden={true} />
+
       {this.props.isAuthenticating === true
         ? <PreSplash />
         : <ReactKappaNavigator isAuthed={this.props.isAuthed} />

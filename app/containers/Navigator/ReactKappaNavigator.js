@@ -1,6 +1,8 @@
 import React, {PropTypes, Component} from 'react'
 import { Navigator, Platform } from 'react-native'
 import { SplashContainer, FooterTabContainer, SettingsContainer } from '../../containers'
+import {HomeContainer, LeaderboardContainer, ProfileContainer} from '../../containers'
+
 
 export default class ReactKappaNavigator extends Component{
 
@@ -12,17 +14,18 @@ export default class ReactKappaNavigator extends Component{
   renderScene= (route, navigator) => {
     //pop() push()
 
-
-
-
-
     if(this.props.isAuthed === false){
       return <SplashContainer navigator={navigator} />
-    }else if (route.settings === true) {
+    }
+    /*
+    else if (route.settings === true) {
       return <SettingsContainer navigator={navigator} />
     }
+    */
     else{
-      return <FooterTabContainer navigator={navigator} />
+      //return <HomeContainer navigator={navigator} />
+      return <ProfileContainer navigator={navigator} />
+      //return <FooterTabContainer navigator={navigator} />
     }
 
 
@@ -51,5 +54,5 @@ export default class ReactKappaNavigator extends Component{
         configureScene={this.configureScene} />
     )
   }
-  
+
 }
