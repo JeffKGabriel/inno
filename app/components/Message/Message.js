@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   },
   nameView:{
     backgroundColor: "#8fa",
-    width: 80,
+    width: 100,
     height:30,
     flexDirection:'row',
     alignSelf:'flex-start',

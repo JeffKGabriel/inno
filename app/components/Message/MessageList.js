@@ -28,7 +28,10 @@ export default function MessageList (props){
                 ref={(ref) => this.listView = ref}
                 onContentSizeChange={(width, height) => {
                   //console.log(height);
-                  this.listView.scrollTo({x:0,y: (height - this.layoutHeight), animated: true})
+                  //console.log(this.layoutHeight);
+                  if(height>this.layoutHeight){
+                    this.listView.scrollTo({x:0,y: (height - this.layoutHeight), animated: false})
+                  }
                 }}
                 onChangeVisibleRows={ ()=> {
                   //this.listView.scrollResponderKeyboardDidShow()

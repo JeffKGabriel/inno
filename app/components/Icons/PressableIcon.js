@@ -11,8 +11,8 @@ export default function PressableIcon (props) {
 
 
   return (
-    <TouchableOpacity onPress={props.onPress} style={{padding: 20}}>
-      <Icon name={props.name} color={props.color ? props.color : "#FFF"} size={60} />
+    <TouchableOpacity onPress={props.onPress} style={{padding: 0}}>
+      <Icon name={props.name} color={props.color ? props.color : "#FFF"} size={props.size ? props.size : 40} />
     </TouchableOpacity>
   )
 }

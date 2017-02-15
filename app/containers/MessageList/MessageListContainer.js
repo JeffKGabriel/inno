@@ -19,7 +19,7 @@ class MessageListContainer extends Component{
 
   constructor(props){
     super(props)
-    console.log("state beforehand" , this.state);
+    //console.log("state beforehand" , this.state);
     this.ds = new ListView.DataSource({rowHasChanged: (r1,r2) => r1 !== r2})
 
     this.state ={
@@ -29,7 +29,7 @@ class MessageListContainer extends Component{
   }
 
   componentWillReceiveProps (nextProps){
-    console.log("What are these nextProps", nextProps);
+    //console.log("What are these nextProps", nextProps);
     if(nextProps.messages !== this.props.messages){
       this.setState({
         ...this.state,
@@ -78,13 +78,20 @@ class MessageListContainer extends Component{
   }
 
   _keyboardDidShow () {
-    this.listView.scrollTo({x:0,y: (this.listView.getMetrics().contentLength - this.layoutHeight), animated: true})
-    console.log("keyboard Show");
+
+    if(this.listView.getMetrics().contentLength > this.layoutHeight){
+      this.listView.scrollTo({x:0,y: (this.listView.getMetrics().contentLength - this.layoutHeight), animated: false})
+    }
+    //console.log("keyboard Show");
   }
 
   _keyboardDidHide () {
-    this.listView.scrollTo({x:0,y: (this.listView.getMetrics().contentLength - this.layoutHeight), animated: true})
-    console.log("keyboard hide");
+    if(this.listView.getMetrics().contentLength > this.layoutHeight){
+      this.listView.scrollTo({x:0,y: (this.listView.getMetrics().contentLength - this.layoutHeight), animated: false})
+    }else{
+      this.listView.scrollTo({x:0,y:0, animated: false})
+    }
+    //console.log("keyboard hide");
   }
 
 
@@ -128,7 +135,7 @@ mapStateToProps = ({authentication, game, messages, messageUsers, players}) =>{
     players: players,
 
     messages: game.messageUids.map( (uid)=>{
-      //console.log("inside messages mapping");
+      //console.log(game.messageUids);
       return{
         ...messages,
         name: messageUsers[uid],

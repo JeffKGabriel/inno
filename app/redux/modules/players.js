@@ -10,7 +10,7 @@ export function addPlayers (players) {
 }
 
 
-export default function messages (state = {}, action) {
+export default function players (state = {}, action) {
   switch (action.type) {
     case ADD_PLAYERS :
       return {
