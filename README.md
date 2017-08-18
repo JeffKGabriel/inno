@@ -1,10 +1,8 @@
 # inno
 
-maifa mobile game 
-
-react native
-
-firebase
+maifa mobile game <br />
+react native <br />
+firebase 
 
 next to do 
 - clean 
